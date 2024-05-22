@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment{
+        IMAGE_TAG = "${BUILD_NUMBER}"
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -12,7 +16,7 @@ pipeline {
                 script{
                     sh '''
                     echo 'Buid Docker Image'
-                    docker build . -t aishwaryak01/inventory-app:v01 
+                    docker build -t aishwaryak01/inventory-app:v${BUILD_NUMBER} .
                     '''
                 }
             }
